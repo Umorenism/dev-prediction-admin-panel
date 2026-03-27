@@ -287,11 +287,11 @@ export default function DevPredictionLogin() {
                 <label className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer">
                     <input type="checkbox" className="accent-indigo-500 rounded border-gray-700 bg-gray-800" /> Remember me
                 </label>
-                <Link to="/forget-password">
+                {/* <Link to="/forget-password">
                     <p className="text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">
                         Forgot Key?
                     </p>
-                </Link>
+                </Link> */}
               </div>
             </form>
           </div>
