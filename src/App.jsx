@@ -1,61 +1,48 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-
 import Dashboard from "./component/Dashboard/Dashboard";
-import ProtectedRoute from "./component/Dashboard/ProtectedRoute";
+import ProtectedRoute from "./context/ProtectedRoute";
 import Login from "./component/Auth/Login";
 
-// Pages
-
-
-import OrderPage from "./pages/OrderPage";
-
-import Management from "./pages/Management";
-
-import OrderDetailInfo from "./detailinfo/OrderDetailInfo";
-import CustomerslInfo from "./detailinfo/CustomersInfo";
-import Settings from "./pages/Settings";
-import Notifications from "./pages/Settings";
-import AnalyticsPage from "./pages/AnalyticDashboard";
-import CustomerPage from "./pages/CustomerPage";
-import AdminPermission from "./pages/AdminPermission";
-import ForgetPassword from "./component/Auth/Forget";
-import { DevPredictionAdminDashboard } from "./pages/AdminDashboard";
-import Transactions from "./pages/Transactions";
 import PredictionsManagement from "./pages/PredictionsManagement";
-import UserManagement from "./pages/UserManagement";
+import Payment from "./pages/Payment";
+import AdminManagement from "./pages/AdminDashboard";
+import UserProfile from "./pages/UserProfile";
+import AdminOverview from "./pages/AdminOverview";
 
 export default function App() {
   return (
     <Routes>
       {/* Public Route */}
       <Route path="/login" element={<Login />} />
-       <Route path="forget-password" element={<ForgetPassword />} />
-      {/* Dashboard Routes */}
+      
+      {/* Protected Dashboard Wrapper 
+          All children here will share the Sidebar and Header inside <Dashboard />
+      */}
       <Route
         path="/dashboard"
         element={
           <ProtectedRoute>
-          <Dashboard />
+            <Dashboard />
           </ProtectedRoute>
         }
       >
-        <Route index element={<DevPredictionAdminDashboard/>} />
-        {/* <Route path="orders" element={<OrderPage />} /> */}
-        {/* <Route path="customers" element={<CustomerPage/>} />
-        <Route path="menu" element={<Management/>} /> */}
-        <Route path="analytics" element={<AnalyticsPage/>} />
-        {/* <Route path="order/:id" element={<OrderDetailInfo />} /> */}
-        {/* <Route path="customers/:id" element={<CustomerslInfo />} /> */}
-        <Route path="notifications" element={<Notifications />} />
-        <Route path="settings" element={<Settings />} />
-        <Route path="admin" element={<AdminPermission />} />
-        <Route path="transactions" element={<Transactions/>} />
+        {/* URL: /dashboard (The Stats Overview) */}
+        <Route index element={<AdminOverview />} />
+
+        {/* URL: /dashboard/admin */}
+        <Route path="admin" element={<AdminManagement />} />
+        
+        {/* URL: /dashboard/predictions */}
         <Route path="predictions" element={<PredictionsManagement/>} />
-        <Route path="users" element={<UserManagement/>} />
-       
+        
+        {/* URL: /dashboard/payment */}
+        <Route path="payment" element={<Payment/>} />
+        
+        {/* URL: /dashboard/users */}
+        <Route path="users" element={<UserProfile/>} />
       </Route>
 
-      {/* Catch all → redirect to login */}
+      {/* Fallback: If no route matches, go to login */}
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );

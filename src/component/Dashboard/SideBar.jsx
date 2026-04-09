@@ -9,6 +9,7 @@ import {
   CreditCard,
   Calendar,
   UserCheck,
+  ShieldAlert,
 } from "lucide-react";
 import logo1 from "../../assets/logo.png";
 import bglogo from "../../assets/sidimg.png";
@@ -21,37 +22,28 @@ const navItems = [
     to: "/dashboard", 
     label: "Dashboard", 
     icon: LayoutDashboard, 
+    end: true // Important: only matches exactly /dashboard
+  },
+  { 
+    to: "/dashboard/admin", // Fixed: added /dashboard prefix
+    label: "Admin Management", 
+    icon: ShieldAlert, // Changed icon for clarity
     end: true 
   },
   { 
-    to: "/dashboard/admin", 
-    label: "Admin Overview", 
+    to: "/dashboard/users", 
+    label: "User Profile", 
     icon: IoPersonSharp 
   },
   { 
-    to: "/dashboard/predictions", 
-    label: "All Predictions", 
-    icon: Trophy 
-  },
-  { 
-    to: "/dashboard/matches", 
-    label: "Matches & Events", 
-    icon: Calendar 
-  },
-  { 
-    to: "/dashboard/users", 
-    label: "User Management", 
-    icon: Users 
-  },
-  { 
-    to: "/dashboard/transactions", 
-    label: "Transactions", 
+    to: "/dashboard/payment", 
+    label: "Payment Logic", 
     icon: CreditCard 
   },
   { 
-    to: "/dashboard/analytics", 
-    label: "Analytics", 
-    icon: BarChart3 
+    to: "/dashboard/predictions", 
+    label: "Predictions Feed", 
+    icon: Trophy 
   },
 ];
 
@@ -121,11 +113,11 @@ export default function Sidebar({ mobile = false }) {
 
         {/* Footer Buttons */}
         <div className="pt-6 mt-auto border-t border-white/20 space-y-1">
-          <FooterButton
+          {/* <FooterButton
             icon={Settings}
             label="Settings"
             onClick={() => navigate("/dashboard/settings")}
-          />
+          /> */}
           <FooterButton
             icon={LogOut}
             label="Logout"
